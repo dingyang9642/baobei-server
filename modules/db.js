@@ -23,7 +23,7 @@ var DB = {
      * @param       {object}   err 返回异常对象
      * @return      {object}       返回格式化数据
      */
-    getDBQueryErrorResult: function(err) {
+    _getDBQueryErrorResult: function(err) {
         var self = this;
         var formatResult = {};
         switch (err.code) {
@@ -54,7 +54,7 @@ var DB = {
      * @param       {Function} callback 相应回调函数
      * @return      {void}              无
      */
-    query: function(type, sql, callback) {
+    _query: function(type, sql, callback) {
         var self = this;
         pool.getConnection(function(err, conn) {
             if(err) {
@@ -66,7 +66,7 @@ var DB = {
                     conn.release(); // 释放连接
                     var formatResult = {};
                     if (err) {
-                        formatResult = self.getDBQueryErrorResult(err);
+                        formatResult = self._getDBQueryErrorResult(err);
                     } else {
                         var resultData = values;
                         formatResult = COMMON.formatResult(MSGCODE.DBERROR_SUCCESS_CODE, MSGCODE.DBERROR_SUCCESS_MSG, resultData);
@@ -85,19 +85,19 @@ var DB = {
      */
     insert: function(sql, callback) {
         var self = this;
-        self.query('insert', sql, callback);
+        self._query('insert', sql, callback);
     },
     delete: function(sql, callback) {
         var self = this;
-        self.query('delete', sql, callback);       
+        self._query('delete', sql, callback);       
     },
     update: function(sql, callback) {
         var self = this;
-        self.query('update', sql, callback);       
+        self._query('update', sql, callback);       
     },
     select: function(sql, callback) {
         var self = this;
-        self.query('select', sql, callback);       
+        self._query('select', sql, callback);       
     }
 };
 

@@ -15,7 +15,7 @@ var User = {
      * @param       {[type]}   userInfo [description]
      * @return      {Boolean}           [description]
      */
-    isLegalUserIno: function(userInfo) {
+    _isLegalUserIno: function(userInfo) {
         var formatResult = {};
         if (userInfo.name ==='') {
             LOGGER.error({type: 'error', msg: 'user username is empty'});
@@ -34,6 +34,29 @@ var User = {
         }
         return {flag: true, result: formatResult};
     },
+    /**
+     * @description 与getUserInfoById函数关联，对返回数据格式进行处理
+     * @dateTime    2017-05-15
+     * @param       {object}   data getUserInfoById函数接收的查询返回数据
+     * @return      {object}        格式化后的数据
+     */
+    _formatUserInfoData: function(data) {
+        var formatResult = {};
+        if (data.resultCode === '0') {
+            // 说明查询正确
+            if (data.result.length === 0) {
+                formatResult = COMMON.formatResult(MSGCODE.QUERYUSER_USER_NOT_EXIT_CODE, MSGCODE.QUERYUSER_USER_NOT_EXIT_MSG, {});
+            } else {
+                formatResult = COMMON.formatResult(data.resultCode, data.resultMsg, data.result[0]);
+            }
+        } else {
+            // 说明查询异常
+            formatResult = COMMON.formatResult(data.resultCode, data.resultMsg, {});
+        }
+        return formatResult;
+    },
+
+    
     /**
      * @description 用户添加操作
      * @dateTime    2017-05-11
@@ -55,7 +78,7 @@ var User = {
         };
         var newOptions = ToolUtil.extend(defaultOptions, options);
         // 一、校验异常
-        var verifyResult = this.isLegalUserIno(newOptions);
+        var verifyResult = this._isLegalUserIno(newOptions);
         if (!verifyResult.flag) {
             callback && callback(verifyResult.result);
             return;
@@ -105,30 +128,9 @@ var User = {
         var sql = "select * from users where id=" + _id;
         DB.select(sql, function(data) {
             // 统一返回格式
-            var newData = self.formatUserInfoData(data);
+            var newData = self._formatUserInfoData(data);
             callback && callback(newData);
         });
-    },
-    /**
-     * @description 与getUserInfoById函数关联，对返回数据格式进行处理
-     * @dateTime    2017-05-15
-     * @param       {object}   data getUserInfoById函数接收的查询返回数据
-     * @return      {object}        格式化后的数据
-     */
-    formatUserInfoData: function(data) {
-        var formatResult = {};
-        if (data.resultCode === '0') {
-            // 说明查询正确
-            if (data.result.length === 0) {
-                formatResult = COMMON.formatResult(MSGCODE.QUERYUSER_USER_NOT_EXIT_CODE, MSGCODE.QUERYUSER_USER_NOT_EXIT_MSG, {});
-            } else {
-                formatResult = COMMON.formatResult(data.resultCode, data.resultMsg, data.result[0]);
-            }
-        } else {
-            // 说明查询异常
-            formatResult = COMMON.formatResult(data.resultCode, data.resultMsg, {});
-        }
-        return formatResult;
     }
 };
 
