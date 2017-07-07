@@ -14,9 +14,9 @@ var CONFIG = {
     "DB": {
         "HOST"      : "localhost",     // 数据库域名
         "USER"      : "root",          // 数据录登录用户名
-        "PASS"      : "root",  // 数据库登录密码
+        "PASS"      : "root",          // 数据库登录密码
         "PORT"      : "3306",          // 数据录登录端口
-        "DATABASE"  : "o2o"            // 数据库名
+        "DATABASE"  : "baobei"         // 数据库名
     }
 };
 

@@ -65,14 +65,15 @@ var User = {
      */
     addUser: function(options, callback) {
         var defaultOptions = {
-            name     : '',     // *必填，用户名 string
-            password : '',     // *必填，密码 string
+            name     : 'test', // *必填，用户名 string
+            password : 'test',     // *必填，密码 string
+            wxId     : '',     // *与前两者对应 微信id
             realname : '',     // 选填，用户名 string
             type     : 0,      // 选填，用户类型 int
             sex      : 0,      // 选填，性别 int
             age      : 0,      // 选填，年龄 int
             email    : '',     // 选填，邮箱 string
-            phone    : '',     // *必填，手机 string
+            phone    : '18818272802',     // 选填，手机 string
             address  : '',     // 选填，地址 string
             flag     : 1       // 选填，默认1，启用状态 int
         };

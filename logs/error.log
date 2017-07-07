@@ -7,3 +7,9 @@
 [2017-05-15 17:16:35.262] [FATAL] error - database ER_BAD_FIELD_ERROR
 [2017-05-15 17:16:45.107] [FATAL] error - database ER_BAD_FIELD_ERROR
 [2017-07-05 20:45:27.915] [ERROR] error - user username is empty
+[2017-07-07 23:29:38.384] [ERROR] error - user username is empty
+[2017-07-07 23:29:45.321] [ERROR] error - user username is empty
+[2017-07-07 23:39:43.460] [ERROR] error - user username is empty
+[2017-07-07 23:42:09.301] [ERROR] error - user password is empty
+[2017-07-07 23:42:32.199] [ERROR] error - user phone is empty
+[2017-07-07 23:42:46.943] [FATAL] error - database ER_BAD_FIELD_ERROR
