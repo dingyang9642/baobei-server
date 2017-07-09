@@ -11,11 +11,4 @@ router.get('/demo', function(req, res, next) {
     res.render('demo-test/index', {});
 });
 
-router.get('*', function(req, res, next) {
-    res.json({
-        "name": '404',
-        "msg": '网页找不到'
-    });
-});
-
 module.exports = router;
