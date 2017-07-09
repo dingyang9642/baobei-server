@@ -10,6 +10,24 @@ var DB = require('./db');     // 基本工具库对象
  */
 var User = {
     /**
+     * 用户默认信息
+     * @type {Object}
+     */
+    _defaultOptions: {
+        name     : '',     // *必填，用户名 string
+        password : '',     // *必填，密码 string
+        wxId     : '',     // *与前两者对应 微信id
+        realname : '',     // 选填，用户名 string
+        type     : 0,      // 选填，用户类型 int
+        sex      : 0,      // 选填，性别 int
+        age      : 0,      // 选填，年龄 int
+        email    : '',     // 选填，邮箱 string
+        phone    : '',     // 选填，手机 string
+        address  : '',     // 选填，地址 string
+        flag     : 1       // 选填，默认1，启用状态 int
+    },
+
+    /**
      * @description 用户信息校验
      * @dateTime    2017-05-12
      * @param       {[type]}   userInfo [description]
@@ -34,6 +52,7 @@ var User = {
         }
         return {flag: true, result: formatResult};
     },
+
     /**
      * @description 与getUserInfoById函数关联，对返回数据格式进行处理
      * @dateTime    2017-05-15
@@ -64,19 +83,7 @@ var User = {
      * @param       {Function} callback 回调函数
      */
     addUser: function(options, callback) {
-        var defaultOptions = {
-            name     : 'test', // *必填，用户名 string
-            password : 'test',     // *必填，密码 string
-            wxId     : '',     // *与前两者对应 微信id
-            realname : '',     // 选填，用户名 string
-            type     : 0,      // 选填，用户类型 int
-            sex      : 0,      // 选填，性别 int
-            age      : 0,      // 选填，年龄 int
-            email    : '',     // 选填，邮箱 string
-            phone    : '18818272802',     // 选填，手机 string
-            address  : '',     // 选填，地址 string
-            flag     : 1       // 选填，默认1，启用状态 int
-        };
+        var defaultOptions = this._defaultOptions;
         var newOptions = ToolUtil.extend(defaultOptions, options);
         // 一、校验异常
         var verifyResult = this._isLegalUserIno(newOptions);
@@ -118,6 +125,7 @@ var User = {
             callback && callback(data);
         });
     },
+    
     /**
      * @description 通过用户id获取用户信息
      * @dateTime    2017-05-09

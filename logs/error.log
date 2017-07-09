@@ -13,3 +13,6 @@
 [2017-07-07 23:42:09.301] [ERROR] error - user password is empty
 [2017-07-07 23:42:32.199] [ERROR] error - user phone is empty
 [2017-07-07 23:42:46.943] [FATAL] error - database ER_BAD_FIELD_ERROR
+[2017-07-08 17:47:03.010] [ERROR] error - user username is empty
+[2017-07-08 17:47:09.391] [ERROR] error - user username is empty
+[2017-07-08 17:47:32.738] [FATAL] error - database ER_BAD_FIELD_ERROR

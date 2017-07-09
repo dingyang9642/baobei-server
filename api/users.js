@@ -1,13 +1,17 @@
 var express = require('express');
 var appUsersApi = express();
 var UserControl = require('../control/user');
-var User = require('../modules/user');
+// var User = require('../modules/user');
 
 // 添加用户
 appUsersApi.get('/addUser', function(req, res) {
-	User.addUser({}, function(data) {
-        res.json(data);
-	})
+	// User.addUser({}, function(data) {
+    //    res.json(data);
+	// })
+	res.json({
+        "name": 'zhoulijie',
+        "age": '27'
+    });
 });
 // 根据id查询用户信息
 appUsersApi.get('/getUserInfoById', function(req, res) {
@@ -19,9 +23,13 @@ appUsersApi.get('/getUserInfoById', function(req, res) {
 		res.json(isLegalUserId.result); return;
 	}
 	// 3、执行查询请求
-	User.getUserInfoById(userId, function(data) {
-        res.json(data);
-	})
+	// User.getUserInfoById(userId, function(data) {
+    //     res.json(data);
+	// })
+	res.json({
+        "name": 'zhoulijie22',
+        "age": '27'
+    });
 });
 
 module.exports = appUsersApi;
