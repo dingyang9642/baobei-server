@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/www",  // 本地测试时比较有用，时刻监听内容变化，自动重启
+    "start": "forever start ./bin/www",
+    "stop": "forever stop ./bin/www",
+    "restart": "forever restart ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -18,6 +21,7 @@
     "serve-favicon": "~2.4.2"
   },
   "devDependencies": {
+    "forever": "^0.15.3",
     "nodemon": "^1.11.0"
   }
 }
