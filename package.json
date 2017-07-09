@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon ./bin/www",
-    "start": "forever start ./bin/www",
-    "stop": "forever stop ./bin/www",
-    "restart": "forever restart ./bin/www"
+    "dev": "PORT=80 nodemon ./bin/www",
+    "start": "PORT=80 forever start ./bin/www",
+    "stop": "PORT=80 forever stop ./bin/www",
+    "restart": "PORT= 80forever restart ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
