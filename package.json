@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon ./bin/www",  // 本地测试时比较有用，时刻监听内容变化，自动重启
+    "dev": "nodemon ./bin/www",
     "start": "forever start ./bin/www",
     "stop": "forever stop ./bin/www",
     "restart": "forever restart ./bin/www"
