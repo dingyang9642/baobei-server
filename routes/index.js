@@ -12,7 +12,7 @@ router.get('/i', function(req, res, next) {
 router.get('/i/caijing', function(req, res, next) {
     res.render('xinxi/index', {});
 });
-router.get('/i/shippin', function(req, res, next) {
+router.get('/i/shipin', function(req, res, next) {
     res.render('xinxi/index', {});
 });
 router.get('/i/lvtu', function(req, res, next) {
