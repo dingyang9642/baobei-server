@@ -1,4 +1,5 @@
 var express = require('express');
+var compression = require('compression');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -13,6 +14,8 @@ var index = require('./routes/index');
 var indexApi = require('./api/index');
 var usersApi = require('./api/users');
 
+// compress responses 
+app.use(compression());
 // 设置项目logo
 app.use(favicon(__dirname + '/public/favicon.ico'));
 // 设置静态资源路径
