@@ -2,13 +2,21 @@ var express = require('express');
 var router = express.Router();
 var COMMON = require('../modules/common');     // 基本工具库对象
 
-
-/* GET home page. */
+/** 页面路由配置 **/
 router.get('/', function(req, res) {
-    res.redirect('/demo');
+    res.redirect('/i');
 });
-router.get('/demo', function(req, res, next) {
-    res.render('demo-test/index', {});
+router.get('/i', function(req, res, next) {
+    res.render('xinxi/index', {});
+});
+router.get('/i/caijing', function(req, res, next) {
+    res.render('xinxi/index', {});
+});
+router.get('/i/shippin', function(req, res, next) {
+    res.render('xinxi/index', {});
+});
+router.get('/i/lvtu', function(req, res, next) {
+    res.render('xinxi/index', {});
 });
 
 module.exports = router;
