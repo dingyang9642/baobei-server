@@ -17,7 +17,10 @@ var CONFIG = {
         "PASS"      : "root",          // 数据库登录密码
         "PORT"      : "3306",          // 数据录登录端口
         "DATABASE"  : "baobei"         // 数据库名
-    }
+    },
+    "WX_PUBLIC_ACCOUNTS": [
+        "股票"
+    ]
 };
 
 module.exports = CONFIG;
