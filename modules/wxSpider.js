@@ -240,6 +240,7 @@ WX_SPIDER.solve_verifycode = function(html, url, callback) {
             }
         };
         WX_SPIDER.request_json(opts, function(err, data) {
+            console.log('fucksssss');
             if (err) return callback(err);
             console.log('验证码识别结果为：' + data.showapi_res_body.Result);
             if (data.showapi_res_code == 0) {
