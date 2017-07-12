@@ -25,7 +25,6 @@ var wxControl = {
     	var _this = this;
         async.waterfall(_this._tasks, function(err, result) {
             if (err) return console.log(err);
-            console.log(11111);
             console.log(result);
         });
     }
