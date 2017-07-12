@@ -236,7 +236,7 @@ WX_SPIDER.solve_verifycode = function(html, url, callback) {
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
                 //授权码
-                "Authorization": "45372792aaf940969c26e34c0e81c2db"
+                "Authorization": "APPCODE 45372792aaf940969c26e34c0e81c2db"
             }
         };
         WX_SPIDER.request_json(opts, function(err, data) {
