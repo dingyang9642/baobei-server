@@ -11,6 +11,7 @@ var app = express();
 // route config 路由配置
 var commonApi = require('./api/common');
 var index = require('./routes/index');
+var wxApi = require('./api/wx');
 var indexApi = require('./api/index');
 var usersApi = require('./api/users');
 
@@ -36,6 +37,7 @@ app.use(cookieParser());
 app.use('/', index);
 
 app.use('/api/common', commonApi);
+app.use('/api/wx', wxApi);
 app.use('/api/index', indexApi);
 app.use('/api/users', usersApi);
 

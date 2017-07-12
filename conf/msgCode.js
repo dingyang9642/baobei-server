@@ -27,7 +27,14 @@ var MSG_CODE = {
     QUERYUSER_USER_PARAMS_ILLEGAL_CODE  : "2100",
     QUERYUSER_USER_PARAMS_ILLEGAL_MSG   : "参数有误",
     QUERYUSER_USER_NOT_EXIT_CODE        : "2101",
-    QUERYUSER_USER_NOT_EXIT_MSG         : "用户不存在"
+    QUERYUSER_USER_NOT_EXIT_MSG         : "用户不存在",
+
+    // 添加微信文章
+    ADDWX_ARTICLE_EMPTY_CODE            : "3000",
+    ADDWX_ARTICLE_EMPTY_MSG             : "文章列表为空",
+    // 查询微信文章
+    QUERYWX_ARTICLE_NOT_EXIT_CODE       : "3101",
+    QUERYWX_ARTICLE_NOT_EXIT_MSG        : "文章不存在"
 
 };
 

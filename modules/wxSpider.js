@@ -223,7 +223,7 @@ WX_SPIDER.solve_verifycode = function(html, url, callback) {
         //通过第三方接口识别验证码,并返回
     task_code.push(function(base64, callback) {
         //base64 = 'data:image/jpeg;base64,' + base64;
-        console.log('验证码base64：' + base64);
+        //console.log('验证码base64：' + base64);
         var form = {
             img_base64: base64,
             typeId: 2040
