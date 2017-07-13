@@ -169,7 +169,6 @@ var WX_CAIJING = {
         // 三、异常校验通过
         var finalValues = allValues.join(",");
         var sql = "insert into wx_caijing(" + keys + ") values" + finalValues + "";
-        console.log(sql);
         DB.insert(sql, function(data) {
             callback && callback(data);
         });
