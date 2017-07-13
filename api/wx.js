@@ -1,16 +1,25 @@
 var express = require('express');
 var appWXApi = express();
-// var wxControl = require('../control/wx');
+var wxControl = require('../control/wx');
 
-appWXApi.get('/', function(req, res) {
-    // wxControl.starSpider(function(){
-    // 	res.json({
-    // 		msg: '爬虫结束'
-    // 	});
-    // });
 
+appWXApi.get('/startTaskSpider', function(req, res) {
+    wxControl.startSchedule();
     res.json({
-    	msg: '爬虫结束'
+    	msg: '启动定时任务-爬虫...'
+    });
+});
+
+appWXApi.get('/stopTaskSpider', function(req, res) {
+    wxControl.cancelSchedule();
+    res.json({
+    	msg: '关闭定时任务-爬虫...'
+    });
+});
+
+appWXApi.get('/start', function(req, res) {
+    wxControl.starSpider(function(data){
+        res.json(data);       
     });
 });
 

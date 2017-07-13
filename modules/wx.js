@@ -57,20 +57,74 @@ var WX_CAIJING = {
         return formatResult;
     },
 
-    _filterAddArticles: function(articleArr) {
-        var defaultOptions = this._defaultOptions;
-        var arTicleslength = articleArr.length;
-        var atTiclesStrValues = [];
-        for (var i = 0; i < arTicleslength; i++) {
-            var tmpArticleOptions = articleArr[i];
-            var newOptions = ToolUtil.extend(defaultOptions, tmpArticleOptions);
-            // 一、校验异常
-            var verifyResult = this._isLegalWXIno(newOptions);
-            if (!verifyResult.flag) {
-                contin;
-            }
+    /**
+     * 根据文章列表返回列表标题数组
+     * @Author   dingyang   [dingyang@baidu.com]
+     * @DateTime 2017-07-13
+     * @param    {[type]}   articleArr           [description]
+     * @return   {[type]}                        [description]
+     */
+    _getArticleTitlesByArticles: function(articleArr) {
+        var articlesLength = articleArr.length;
+        var results = [];
+        for (var i = 0; i < articlesLength; i++) {
+            results.push(articleArr[i]["title"]);
         }
+        return results;
     },
+
+    /**
+     * 根据文章标题集合获取数据库中存在的标题
+     * @Author   dingyang   [dingyang@baidu.com]
+     * @DateTime 2017-07-13
+     * @param    {array}   articleTitles         [description]
+     * @return   {[type]}                        [description]
+     */
+    _getExitArticleTitlesByArticlesTitles: function(articleTitles, callback) {
+        var titlesStr = ToolUtil.array2str(articleTitles, ',', true);;
+        var sql = "select title from wx_caijing where title in (" + titlesStr + ")";
+        DB.select(sql, function(data) {
+            callback && callback(data);
+        });
+    },
+
+    _filterArticles: function(articleArr, exitArticleTitles) {
+        var articlesLength = articleArr.length;
+        var exitArticleTitlesLength = exitArticleTitles.length;
+        var afterExitArticleTitles = [];
+        var afterResults = [];
+        // 首先对数据查询结果进行初步数据处理，数组形式
+        for (var i = 0; i < exitArticleTitlesLength; i++) {
+            var tmpTitle = exitArticleTitles[i]["title"];
+            afterExitArticleTitles.push(tmpTitle);
+        }
+        // 然后进行数据筛选
+        for (var j = 0; j < articlesLength; j++) {
+            var tmpArticle = articleArr[j];
+            if (afterExitArticleTitles.indexOf(tmpArticle["title"]) >= 0) continue;
+            afterResults.push(tmpArticle);
+        }
+        return afterResults;
+    },
+
+    addArticles: function(articleArr, callback) {
+        var _this = this;
+        // 获取文章标题列表
+        var articleTitles = _this._getArticleTitlesByArticles(articleArr);
+        // 根据文章标题列表查询是否数据库中存在该条记录
+        _this._getExitArticleTitlesByArticlesTitles(articleTitles, function(data){
+            // 返回数据结果,然后进行去重处理
+            if (data.resultCode === "0") {
+                var results = data.result;
+                var filterResults = _this._filterArticles(articleArr, results);
+                _this._addArticlesToDB(filterResults, callback);
+            } else {
+                callback&&callback(data);
+            }
+        });
+    },
+
+
     
     /**
      * @description 文章添加操作
@@ -78,7 +132,7 @@ var WX_CAIJING = {
      * @param       {array}   articleArr  文章数组[{},{}]
      * @param       {Function} callback 回调函数
      */
-    addArticles: function(articleArr, callback) {
+    _addArticlesToDB: function(articleArr, callback) {
         var _this = this;
         var defaultOptions = _this._defaultOptions;
         var articlesLength = articleArr.length;
@@ -136,7 +190,7 @@ var WX_CAIJING = {
             callback && callback(data);
         });
     },
-    
+
     /**
      * @description 通过文章id获取文章信息
      * @dateTime    2017-05-09

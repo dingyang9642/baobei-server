@@ -1,4 +1,5 @@
 var wxSpider = require('../modules/wxSpider.js');
+var schedule = require("node-schedule");
 var wxDB = require('../modules/wx.js');
 var APPCONFIG = require('../conf/conf');
 var async = require('async');
@@ -10,6 +11,44 @@ var WX_PUBLIC_ACCOUNTS = APPCONFIG.WX_PUBLIC_ACCOUNTS;
  * @type {Object}
  */
 var wxControl = {
+    // 定时任务
+    _scheduleId: null,
+    /**
+     * 定时任务启动
+     * @Author   dingyang   [dingyang@baidu.com]
+     * @DateTime 2017-07-13
+     * @return   {[type]}   [description]
+     */
+    startSchedule: function() {
+        var _this = this;
+        // 首先需要中止任务
+        _this.cancelSchedule();
+        // 配置定时任务
+        var rule = new schedule.RecurrenceRule();
+        rule.dayOfWeek = [0, new schedule.Range(1, 6)];
+        rule.hour = 1;
+        rule.minute = 0;
+        // 定时任务启动
+        _this._scheduleId = schedule.scheduleJob(rule, function(){
+            _this.starSpider(function(data){
+                console.log("爬虫结果为：" + JSON.stringify(data));
+            });
+        });
+    },
+    /**
+     * 关闭定时任务
+     * @Author   dingyang   [dingyang@baidu.com]
+     * @DateTime 2017-07-13
+     * @return   {[type]}   [description]
+     */
+    cancelSchedule: function() {
+        var _this = this;
+        if (_this._scheduleId) {
+            _this._scheduleId.cancel();
+            _this._scheduleId = null;
+        }
+    },
+
     _finalResults: [],
     /**
      * 获取爬虫任务
@@ -73,6 +112,12 @@ var wxControl = {
                 _this.subStarSpider(newStartIndex, callback);
             }
         });
+    },
+
+    getSpiderArticlesTitles: function() {
+        var _this = this;
+        var spiderResults = _this._finalResults;
+
     }
 };
 

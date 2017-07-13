@@ -19,7 +19,7 @@ var CONFIG = {
         "DATABASE"  : "baobei"         // 数据库名
     },
     "WX_PUBLIC_ACCOUNTS": [
-        "股票"
+        "wenguzixun"
     ]
 };
 
