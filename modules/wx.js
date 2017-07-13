@@ -16,6 +16,7 @@ var WX_CAIJING = {
     _defaultOptions: {
         title: '',         // 文章标题 string
         url: '',           // 文章url string
+        thumb_nail:'',     // 文章缩略图
         read_num: 0,       // 文章阅读数 int
         like_num: 0,       // 文章点赞数 int
         release_time: 0,   // 文章发布时间，datetime

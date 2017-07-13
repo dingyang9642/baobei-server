@@ -116,7 +116,8 @@ WX_SPIDER.get_info_by_url = function(article_titles, article_urls, article_pub_t
                         like_num: '',
                         release_time: '',
                         author: '',
-                        wechat_number: ''
+                        wechat_number: '',
+                        thumb_nail: ''
                     }
                     var task2 = [];
                     //发布日期,作者,公众号,url
@@ -130,9 +131,15 @@ WX_SPIDER.get_info_by_url = function(article_titles, article_urls, article_pub_t
                                 var author = $($(".rich_media_meta_list em")[1]).text();
                                 //公众号
                                 var wechat_number = $("#post-user").text();
+                                //第一张图片
+                                var thumb_nail = "";
+                                if ($('img')[1] && $('img')[1]["attribs"]["data-src"]) {
+                                    thumb_nail = $('img')[1]["attribs"]["data-src"];
+                                }
                                 article_object.release_time = release_time;
                                 article_object.author = author;
                                 article_object.wechat_number = wechat_number;
+                                article_object.thumb_nail = thumb_nail;
                                 article_object.title = article_titles[index].replace(/amp;/g, '').replace(/&quot;/g, '"');
                                 article_object.url = article_urls[index];
                                 callback(null, article_url);
