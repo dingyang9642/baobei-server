@@ -32,6 +32,8 @@ var MSG_CODE = {
     // 添加微信文章
     ADDWX_ARTICLE_EMPTY_CODE            : "3000",
     ADDWX_ARTICLE_EMPTY_MSG             : "文章列表为空",
+    ADDWX_ARTICLE_DATA_ILLEGAL_CODE     : "3001",
+    ADDWX_ARTICLE_DATA_ILLEGAL_MSG      : "数据不合法",
     // 查询微信文章
     QUERYWX_ARTICLE_NOT_EXIT_CODE       : "3101",
     QUERYWX_ARTICLE_NOT_EXIT_MSG        : "文章不存在"

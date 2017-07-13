@@ -14,7 +14,8 @@ WX_SPIDER.search_wechat = function(public_num, callback) {
     request(url, function(err, response, html) {
         if (err) return callback(err, null);
         if (html.indexOf('<title>302 Found</title>') != -1) return callback(null, '302');
-        if (html.indexOf('您的访问过于频繁') != -1) return callback('-访问过于频繁')
+        if (html.indexOf('您的访问过于频繁') != -1) return callback('-访问过于频繁');
+        if (html.indexOf('暂无与') != -1 && html.indexOf('”相关的官方认证订阅号') != -1) return callback('-公众号不存在');
         var $ = cheerio.load(html);
         //公众号页面的临时url
         var wechat_num = $($("#sogou_vr_11002301_box_0 a")[0]).attr('href') || '';
@@ -137,8 +138,12 @@ WX_SPIDER.get_info_by_url = function(article_titles, article_urls, article_pub_t
                                 if ($('img')[1] && $('img')[1]["attribs"]["data-src"]) {
                                     thumb_nail = $('img')[1]["attribs"]["data-src"];
                                 }
+                                // 获取文章摘要
+                                var abstract = WX_SPIDER.filterArcticleAbstract($(".rich_media_content").text(), 100);
+
                                 article_object.release_time = release_time;
                                 article_object.author = author;
+                                article_object.abstract = abstract;
                                 article_object.wechat_number = wechat_number;
                                 article_object.thumb_nail = thumb_nail;
                                 article_object.title = article_titles[index].replace(/amp;/g, '').replace(/&quot;/g, '"');
@@ -183,8 +188,11 @@ WX_SPIDER.get_info_by_url = function(article_titles, article_urls, article_pub_t
                         });
                     })
                     async.waterfall(task2, function(err, result) {
-                        if (err) return callback(err, null);
-                        articles.push(article_object);
+                        if (err) {
+                            console.log('data has some problems');
+                            // return callback(err, null);
+                        }
+                        if (!err) articles.push(article_object);
                         setTimeout(function() {
                             callback(null);
                         }, 500 + Math.ceil(Math.random() * 500));
@@ -198,6 +206,33 @@ WX_SPIDER.get_info_by_url = function(article_titles, article_urls, article_pub_t
         if (err) return callback(err, null);
         callback(null, articles);
     })
+};
+
+WX_SPIDER.filterArcticleAbstract = function(abstract, maxLength) {
+    maxLength = maxLength || 100;
+    // 首先进行左右空字符串删除操作
+    abstract = abstract.replace(/(^\s*)|(\s*$)/g, ''); 
+    // 如果摘要为空，直接返回空字符串
+    if (abstract === "") return "";
+    // 否则，继续进行特殊字符判断
+    var startText = [
+        "今日回顾"
+    ];
+    var endIndex = abstract.length - 1;
+    var startIndex = 0;
+    for (var i = 0; i < startText.length; i++) {
+        var tmpStartText = startText[i];
+        var tmpStartIndex = abstract.indexOf(tmpStartText);
+        if (tmpStartIndex >= 0) {
+            startIndex = tmpStartIndex;
+            break;
+        }
+    }
+    var afterAbstract = abstract.substring(startIndex, endIndex);
+    if (afterAbstract.length > maxLength) {
+        afterAbstract = afterAbstract.substr(0, maxLength);
+    }
+    return afterAbstract;
 };
 
 /**

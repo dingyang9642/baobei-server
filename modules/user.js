@@ -33,7 +33,7 @@ var User = {
      * @param       {[type]}   userInfo [description]
      * @return      {Boolean}           [description]
      */
-    _isLegalUserIno: function(userInfo) {
+    _isLegalUserInfo: function(userInfo) {
         var formatResult = {};
         if (userInfo.name ==='') {
             LOGGER.error({type: 'error', msg: 'user username is empty'});
@@ -84,9 +84,9 @@ var User = {
      */
     addUser: function(options, callback) {
         var defaultOptions = this._defaultOptions;
-        var newOptions = ToolUtil.extend(defaultOptions, options);
+        var newOptions = ToolUtil.extend(defaultOptions, options, true);
         // 一、校验异常
-        var verifyResult = this._isLegalUserIno(newOptions);
+        var verifyResult = this._isLegalUserInfo(newOptions);
         if (!verifyResult.flag) {
             callback && callback(verifyResult.result);
             return;

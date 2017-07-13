@@ -20,7 +20,7 @@ var WX_CAIJING = {
         thumb_nail:'',     // 文章缩略图
         read_num: 0,       // 文章阅读数 int
         like_num: 0,       // 文章点赞数 int
-        release_time: 0,   // 文章发布时间，datetime
+        release_time: '',   // 文章发布时间，datetime
         author: '',        // 文章作者 string
         wechat_number: '', // 文章公众号 string
         flag: 1            // 选填，默认1，启用状态 int
@@ -32,8 +32,12 @@ var WX_CAIJING = {
      * @param       {[type]}   wxInfo   [description]
      * @return      {Boolean}           [description]
      */
-    _isLegalWXIno: function(wxInfo) {
+    _isLegalWXInfo: function(wxInfo) {
         var formatResult = {};
+        if (wxInfo.title === "" || wxInfo.abstract === "" || wxInfo.release_time === "") {
+            formatResult = COMMON.formatResult(MSGCODE.ADDWX_ARTICLE_DATA_ILLEGAL_CODE, MSGCODE.ADDWX_ARTICLE_DATA_ILLEGAL_MSG, {});
+            return {flag: false, result: formatResult};
+        } 
         return {flag: true, result: formatResult};
     },
 
@@ -139,20 +143,16 @@ var WX_CAIJING = {
         var defaultOptions = _this._defaultOptions;
         var articlesLength = articleArr.length;
         var keys = "", allValues = [];
-        // 一、判断数组长度是否为空
-        if (articlesLength === 0) {
-            var errorResult = COMMON.formatResult(MSGCODE.ADDWX_ARTICLE_EMPTY_CODE, MSGCODE.ADDWX_ARTICLE_EMPTY_MSG, {});
-            callback && callback(errorResult);
-            return;
-        }
-        // 二、校验每一项是否正确
+        // 一、校验每一项是否正确
         for (var i = 0; i < articlesLength; i++) {
             var tmpArticleOptions = articleArr[i];
-            var newOptions = ToolUtil.extend(defaultOptions, tmpArticleOptions);
-            var verifyResult = _this._isLegalWXIno(newOptions);
+            var newOptions = ToolUtil.extend(defaultOptions, tmpArticleOptions, true);
+            var verifyResult = _this._isLegalWXInfo(newOptions);
             if (!verifyResult.flag) {
-                callback && callback(verifyResult.result);
-                return;
+                console.log("存在数据不符合规范，已忽略");
+                //callback && callback(verifyResult.result);
+                //return;
+                continue;
             }
             var newOptionsKeysAndValues = ToolUtil.getKeysAndValues(newOptions),
                 tmpKeys = newOptionsKeysAndValues.keys.join(','),
@@ -160,9 +160,16 @@ var WX_CAIJING = {
             keys = tmpKeys;
             allValues.push("(" + tmpValues + ")");
         }
+        // 二、判断是否数据为空
+        if (allValues.length === 0) {
+            var errorResult = COMMON.formatResult(MSGCODE.ADDWX_ARTICLE_EMPTY_CODE, MSGCODE.ADDWX_ARTICLE_EMPTY_MSG, {});
+            callback && callback(errorResult);
+            return;
+        }
         // 三、异常校验通过
         var finalValues = allValues.join(",");
         var sql = "insert into wx_caijing(" + keys + ") values" + finalValues + "";
+        console.log(sql);
         DB.insert(sql, function(data) {
             callback && callback(data);
         });

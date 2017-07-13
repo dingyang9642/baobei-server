@@ -95,6 +95,7 @@ var wxControl = {
             callback&&callback();
             return;
         }
+        console.log("开始爬取微信公众号：" + WX_PUBLIC_ACCOUNTS[startIndex]);
         var _tasks = _this._getTasks(WX_PUBLIC_ACCOUNTS[startIndex]);
         async.waterfall(_tasks, function(err, result) {
             // 如果中途有错误，输出错误信息
@@ -107,7 +108,6 @@ var wxControl = {
             if (startIndex === (accountsLength - 1)) {
                 wxDB.addArticles(_this._finalResults, callback);
             } else {
-                console.log("ssssss");
                 var newStartIndex = startIndex + 1;
                 _this.subStarSpider(newStartIndex, callback);
             }

@@ -19,7 +19,13 @@ var CONFIG = {
         "DATABASE"  : "baobei"         // 数据库名
     },
     "WX_PUBLIC_ACCOUNTS": [
-        "wenguzixun"
+        "金海实盘",
+        "今日牛股",
+        "牛股诊断",
+        "涨停大队",
+        "股市看盘",
+        "郎club",
+        "今日股票热点"
     ]
 };
 
