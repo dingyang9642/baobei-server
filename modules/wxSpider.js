@@ -111,6 +111,7 @@ WX_SPIDER.get_info_by_url = function(article_titles, article_urls, article_pub_t
                 task1.push(function(callback) {
                     var article_object = {
                         title: '',
+                        abstract: '',
                         url: '',
                         read_num: '',
                         like_num: '',
