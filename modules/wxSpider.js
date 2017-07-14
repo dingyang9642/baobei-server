@@ -2,7 +2,7 @@ var request = require('request');
 var async = require('async');
 var cheerio = require('cheerio');
 var WX_SPIDER = {};
-
+var GLOBAL_WX_PUBLIC_NUMBER = "";
 /**
 根据微信号搜索公众号,并获取搜素到的第一个公众号链接
 @param {string} public_num 微信号
@@ -10,12 +10,13 @@ var WX_SPIDER = {};
 */
 WX_SPIDER.search_wechat = function(public_num, callback) {
     var encode_public_num = encodeURIComponent(public_num);
+    GLOBAL_WX_PUBLIC_NUMBER = public_num;
     var url = `http://weixin.sogou.com/weixin?type=1&query=${encode_public_num}&ie=utf8&_sug_=y&_sug_type_=1`;
     request(url, function(err, response, html) {
         if (err) return callback(err, null);
         if (html.indexOf('<title>302 Found</title>') != -1) return callback(null, '302');
         if (html.indexOf('您的访问过于频繁') != -1) return callback('-访问过于频繁');
-        if (html.indexOf('暂无与') != -1 && html.indexOf('”相关的官方认证订阅号') != -1) return callback('-公众号不存在');
+        if (html.indexOf('暂无与') != -1 && html.indexOf('相关的官方认证订阅号') != -1) return callback('-公众号不存在');
         var $ = cheerio.load(html);
         //公众号页面的临时url
         var wechat_num = $($("#sogou_vr_11002301_box_0 a")[0]).attr('href') || '';
@@ -57,11 +58,11 @@ WX_SPIDER.look_wechat_by_url = function(url, callback) {
         task4.push(function(html, callback) {
             //文章数组,页面上是没有的,在js中,通过正则截取出来
             var msglist = html.match(/var msgList = ({.+}}]});?/);
-            if (!msglist) return callback(`-没有搜索到 ${publicNum} 的文章,只支持订阅号,服务号不支持!`);
+            if (!msglist) return callback(`-没有搜索到 ${GLOBAL_WX_PUBLIC_NUMBER} 的文章,只支持订阅号,服务号不支持!`);
             msglist = msglist[1];
             msglist = msglist.replace(/(&quot;)/g, '\\\"').replace(/(&nbsp;)/g, '');
             msglist = JSON.parse(msglist);
-            if (msglist.list.length == 0) return callback(`-没有搜索到 ${publicNum} 的文章,只支持订阅号,服务号不支持!`);
+            if (msglist.list.length == 0) return callback(`-没有搜索到 ${GLOBAL_WX_PUBLIC_NUMBER} 的文章,只支持订阅号,服务号不支持!`);
 
             //循环文章数组,重组数据
             msglist.list.forEach(function(msg, index) {

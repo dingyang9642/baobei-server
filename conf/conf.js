@@ -21,7 +21,6 @@ var CONFIG = {
     "WX_PUBLIC_ACCOUNTS": [
         "金海实盘",
         "今日牛股",
-        "牛股诊断",
         "涨停大队",
         "股市看盘",
         "郎club",
