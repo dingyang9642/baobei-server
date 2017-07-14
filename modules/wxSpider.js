@@ -189,7 +189,7 @@ WX_SPIDER.get_info_by_url = function(article_titles, article_urls, article_pub_t
                     })
                     async.waterfall(task2, function(err, result) {
                         if (err) {
-                            console.log('data has some problems');
+                            console.log('The article has removed!!! go on the next...');
                             // return callback(err, null);
                         }
                         if (!err) articles.push(article_object);
