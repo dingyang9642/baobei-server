@@ -115,6 +115,12 @@ var WX_CAIJING = {
 
     addArticles: function(articleArr, callback) {
         var _this = this;
+        // 判断是否数据为空
+        if (articleArr.length === 0) {
+            var errorResult = COMMON.formatResult(MSGCODE.ADDWX_ARTICLE_EMPTY_CODE, MSGCODE.ADDWX_ARTICLE_EMPTY_MSG, {});
+            callback && callback(errorResult);
+            return;
+        }
         // 获取文章标题列表
         var articleTitles = _this._getArticleTitlesByArticles(articleArr);
         // 根据文章标题列表查询是否数据库中存在该条记录
