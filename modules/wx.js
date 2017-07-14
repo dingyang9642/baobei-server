@@ -24,6 +24,8 @@ var WX_ARTICLE = {
         release_time: '',   // 文章发布时间，datetime
         author: '',        // 文章作者 string
         wechat_number: '', // 文章公众号 string
+        create_time: ToolUtil.getNowFormatDate(),
+        update_time: ToolUtil.getNowFormatDate(),
         flag: 1            // 选填，默认1，启用状态 int
     },
 
