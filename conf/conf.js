@@ -19,12 +19,31 @@ var CONFIG = {
         "DATABASE"  : "baobei"         // 数据库名
     },
     "WX_PUBLIC_ACCOUNTS": [
-        "金海实盘",
-        "今日牛股",
-        "涨停大队",
-        "股市看盘",
-        "郎club",
-        "今日股票热点"
+        {
+          "type": "caijing",
+          "name": "金海实盘"
+        }, {
+          "type": "caijing",
+          "name": "今日牛股"
+        }, {
+          "type": "caijing",
+          "name": "涨停大队"
+        }, {
+          "type": "caijing",
+          "name": "股市看盘"
+        }, {
+          "type": "caijing",
+          "name": "郎club"
+        }, {
+          "type": "caijing",
+          "name": "今日股票热点"
+        }, {
+          "type": "caijing",
+          "name": "波段笔记"
+        }, {
+          "type": "wangzherongyao",
+          "name": "王者荣耀"
+        }
     ]
 };
 

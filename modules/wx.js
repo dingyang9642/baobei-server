@@ -8,7 +8,7 @@ var DB = require('./db');     // 基本工具库对象
  * 微信数据库操作对象
  * @type {Object}
  */
-var WX_CAIJING = {
+var WX_ARTICLE = {
     /**
      * 用户默认信息
      * @type {Object}
@@ -16,6 +16,7 @@ var WX_CAIJING = {
     _defaultOptions: {
         title: '',         // 文章标题 string
         abstract: '',      // 文章摘要
+        type: '',          // 文章分类
         url: '',           // 文章url string
         thumb_nail:'',     // 文章缩略图
         read_num: 0,       // 文章阅读数 int
@@ -88,7 +89,7 @@ var WX_CAIJING = {
      */
     _getExitArticleTitlesByArticlesTitles: function(articleTitles, callback) {
         var titlesStr = ToolUtil.array2str(articleTitles, ',', true);;
-        var sql = "select title from wx_caijing where title in (" + titlesStr + ")";
+        var sql = "select title from wx_articles where title in (" + titlesStr + ")";
         DB.select(sql, function(data) {
             callback && callback(data);
         });
@@ -174,7 +175,7 @@ var WX_CAIJING = {
         }
         // 三、异常校验通过
         var finalValues = allValues.join(",");
-        var sql = "insert into wx_caijing(" + keys + ") values" + finalValues + "";
+        var sql = "insert into wx_articles(" + keys + ") values" + finalValues + "";
         DB.insert(sql, function(data) {
             callback && callback(data);
         });
@@ -187,7 +188,7 @@ var WX_CAIJING = {
      * @param       {Function} callback 回调函数
      */
     deleteArticleById: function(_id, callback) {
-        var sql = "update wx_caijing set flag=-1 where id=" + _id;
+        var sql = "update wx_articles set flag=-1 where id=" + _id;
         DB.update(sql, function(data) {
             callback && callback(data);
         });
@@ -199,7 +200,7 @@ var WX_CAIJING = {
      * @return      {array}   返回文章数组列表
      */
     getAllArticles: function(callback) {
-        var sql = "select * from wx_caijing";
+        var sql = "select * from wx_articles";
         DB.select(sql, function(data) {
             callback && callback(data);
         });
@@ -213,7 +214,7 @@ var WX_CAIJING = {
      */
     getArticleInfoById: function(_id, callback) {
         var self = this;
-        var sql = "select * from wx_caijing where id=" + _id;
+        var sql = "select * from wx_articles where id=" + _id;
         DB.select(sql, function(data) {
             // 统一返回格式
             var newData = self._formatArticleInfoData(data);
@@ -222,4 +223,4 @@ var WX_CAIJING = {
     }
 };
 
-module.exports = WX_CAIJING;
+module.exports = WX_ARTICLE;

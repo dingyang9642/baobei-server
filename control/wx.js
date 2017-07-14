@@ -57,12 +57,13 @@ var wxControl = {
      * @param    {[type]}   wxPublicName         [description]
      * @return   {[type]}                        [description]
      */
-    _getTasks: function(wxPublicName) {
+    _getTasks: function(wxPublicName, wxPublicNameType) {
         wxPublicName = wxPublicName || "上海";
+        wxPublicNameType = wxPublicNameType || "";
         return [
             // 搜索公众号,最好是微信号或者微信全名
             function(callback) {
-                wxSpider.search_wechat(wxPublicName, callback);
+                wxSpider.search_wechat(wxPublicName, wxPublicNameType, callback);
             },
             // 根据url获取公众号获取最后5条图文列表
             function(url, callback) {
@@ -95,8 +96,8 @@ var wxControl = {
             callback&&callback();
             return;
         }
-        console.log("开始爬取微信公众号：" + WX_PUBLIC_ACCOUNTS[startIndex]);
-        var _tasks = _this._getTasks(WX_PUBLIC_ACCOUNTS[startIndex]);
+        console.log("开始爬取微信公众号：" + WX_PUBLIC_ACCOUNTS[startIndex]["name"]);
+        var _tasks = _this._getTasks(WX_PUBLIC_ACCOUNTS[startIndex]["name"], WX_PUBLIC_ACCOUNTS[startIndex]["type"]);
         async.waterfall(_tasks, function(err, result) {
             // 如果中途有错误，输出错误信息
             if (err) {

@@ -2,15 +2,19 @@ var request = require('request');
 var async = require('async');
 var cheerio = require('cheerio');
 var WX_SPIDER = {};
-var GLOBAL_WX_PUBLIC_NUMBER = "";
+
+var GLOBAL_WX_PUBLIC_NUMBER = "";  // 微信公众号名称
+var GLOBAL_WX_PUBLIC_NUMBER_TYPE = ""; // 卫星公众号类型
+
 /**
 根据微信号搜索公众号,并获取搜素到的第一个公众号链接
 @param {string} public_num 微信号
 @param {function} callback 回调函数,callback(null,url)
 */
-WX_SPIDER.search_wechat = function(public_num, callback) {
+WX_SPIDER.search_wechat = function(public_num, public_num_type, callback) {
     var encode_public_num = encodeURIComponent(public_num);
-    GLOBAL_WX_PUBLIC_NUMBER = public_num;
+    // 设置公共变量
+    WX_SPIDER.GLOBAL_WX_PUBLIC_VARIABLES(public_num, public_num_type);
     var url = `http://weixin.sogou.com/weixin?type=1&query=${encode_public_num}&ie=utf8&_sug_=y&_sug_type_=1`;
     request(url, function(err, response, html) {
         if (err) return callback(err, null);
@@ -24,6 +28,11 @@ WX_SPIDER.search_wechat = function(public_num, callback) {
             callback(null, wechat_num.replace(/amp;/g, ''));
         }, 1000 + Math.ceil(Math.random() * 500));
     })
+};
+
+WX_SPIDER.GLOBAL_WX_PUBLIC_VARIABLES = function(public_num, public_num_type) {
+    GLOBAL_WX_PUBLIC_NUMBER = public_num;
+    GLOBAL_WX_PUBLIC_NUMBER_TYPE = public_num_type;
 };
 
 /**
@@ -114,6 +123,7 @@ WX_SPIDER.get_info_by_url = function(article_titles, article_urls, article_pub_t
                     var article_object = {
                         title: '',
                         abstract: '',
+                        type: GLOBAL_WX_PUBLIC_NUMBER_TYPE,
                         url: '',
                         read_num: '',
                         like_num: '',
