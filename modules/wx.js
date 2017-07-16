@@ -201,10 +201,43 @@ var WX_ARTICLE = {
      * @dateTime    2017-05-09
      * @return      {array}   返回文章数组列表
      */
-    getAllArticles: function(callback) {
-        var sql = "select * from wx_articles";
+    getArticlesByType: function(type, callback) {
+        var sql = "select * from wx_articles where type='" + type + "' order by create_time";
         DB.select(sql, function(data) {
             callback && callback(data);
+        });
+    },
+
+    /**
+     * @description 获取所有文章[分页查询]
+     * @dateTime    2017-05-09
+     * @return      {array}   返回文章数组列表
+     */
+    getArticlesWithPage: function(type, pageNum, pageSize, callback) {
+        var startIndex = (pageNum - 1) * pageSize;
+        var sql = "select * from wx_articles where type='" + type + "' order by create_time limit " + startIndex + "," + pageSize;
+        DB.select(sql, function(data) {
+            if (data.resultCode === "0") {
+                var countSql = "select count(id) from wx_articles where type='" + type + "'";
+                DB.select(countSql, function(countData) {
+                    if (countData.resultCode === "0") {
+                        var countNumber = countData.result[0]["count(id)"];
+                        var newResult = {};
+                        newResult.articles = data.result;
+                        newResult.pagination = {
+                            pageNum: pageNum,
+                            pageSize: pageSize,
+                            totalCount: countNumber
+                        };
+                        data.result = newResult;
+                        callback && callback(data);
+                    } else {
+                        callback && callback(countData);
+                    }
+                });
+            } else {
+                callback && callback(data);
+            }
         });
     },
 
@@ -223,6 +256,7 @@ var WX_ARTICLE = {
             callback && callback(newData);
         });
     }
+
 };
 
 module.exports = WX_ARTICLE;

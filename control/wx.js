@@ -115,10 +115,41 @@ var wxControl = {
         });
     },
 
-    getSpiderArticlesTitles: function() {
-        var _this = this;
-        var spiderResults = _this._finalResults;
+    /**
+     * 获取所有文章
+     * @Author   dingyang   [dingyang@baidu.com]
+     * @DateTime 2017-07-16
+     * @param    {Function} callback             [description]
+     * @return   {[type]}                        [description]
+     */
+    getArticlesByType: function(type, callback) {
+        wxDB.getArticlesByType(type, callback);
+    },
 
+    /**
+     * 通过type并且分页获取数据
+     * @Author   dingyang   [dingyang@baidu.com]
+     * @DateTime 2017-07-16
+     * @param    {[type]}   type                 [description]
+     * @param    {[type]}   pageNum              [description]
+     * @param    {[type]}   pageSize             [description]
+     * @param    {Function} callback             [description]
+     * @return   {[type]}                        [description]
+     */
+    getArticlesWithPage: function(type, pageNum, pageSize, callback) {
+        wxDB.getArticlesWithPage(type, pageNum, pageSize, callback);
+    },
+
+    /**
+     * 通过文章id获取文章内容
+     * @Author   dingyang   [dingyang@baidu.com]
+     * @DateTime 2017-07-16
+     * @param    {[type]}   _id                  [description]
+     * @param    {Function} callback             [description]
+     * @return   {[type]}                        [description]
+     */
+    getArticleInfoById: function(_id, callback) {
+        wxDB.getArticleInfoById(_id, callback);
     }
 };
 

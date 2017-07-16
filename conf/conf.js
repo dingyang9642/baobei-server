@@ -41,6 +41,18 @@ var CONFIG = {
           "type": "caijing",
           "name": "波段笔记"
         }, {
+          "type": "lvtu",
+          "name": "Feekr旅行"
+        }, {
+          "type": "lvtu",
+          "name": "众信旅游"
+        }, {
+          "type": "lvtu",
+          "name": "环球旅行摄影频道"
+        }, {
+          "type": "lvtu",
+          "name": "ilvxingcom"
+        }, {
           "type": "wangzherongyao",
           "name": "王者荣耀"
         }

@@ -1,13 +1,10 @@
 var express = require('express');
 var appUsersApi = express();
 var UserControl = require('../control/user');
-// var User = require('../modules/user');
+var User = require('../modules/user');
 
 // 添加用户
 appUsersApi.get('/addUser', function(req, res) {
-	// User.addUser({}, function(data) {
-    //    res.json(data);
-	// })
 	res.json({
         "name": 'zhoulijie',
         "age": '27'
