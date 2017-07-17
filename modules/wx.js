@@ -18,6 +18,7 @@ var WX_ARTICLE = {
         abstract: '',      // 文章摘要
         type: '',          // 文章分类
         url: '',           // 文章url string
+        content: '',       // 文章内容
         thumb_nail:'',     // 文章缩略图
         read_num: 0,       // 文章阅读数 int
         like_num: 0,       // 文章点赞数 int

@@ -125,6 +125,7 @@ WX_SPIDER.get_info_by_url = function(article_titles, article_urls, article_pub_t
                         abstract: '',
                         type: GLOBAL_WX_PUBLIC_NUMBER_TYPE,
                         url: '',
+                        content: '',
                         read_num: '',
                         like_num: '',
                         release_time: '',
@@ -151,7 +152,7 @@ WX_SPIDER.get_info_by_url = function(article_titles, article_urls, article_pub_t
                                 }
                                 // 获取文章摘要
                                 var abstract = WX_SPIDER.filterArcticleAbstract($(".rich_media_content").text(), 100);
-
+                                article_object.content = '';
                                 article_object.release_time = release_time;
                                 article_object.author = author;
                                 article_object.abstract = abstract;
