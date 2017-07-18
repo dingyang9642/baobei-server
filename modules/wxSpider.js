@@ -149,9 +149,9 @@ WX_SPIDER.get_info_by_url = function(article_titles, article_urls, article_pub_t
                                 var thumb_nail = "";
                                 if ($('img')[3] && $('img')[3]["attribs"]["data-src"]) {
                                     thumb_nail = $('img')[3]["attribs"]["data-src"];
-                                } else if ($('img')[2] && $('img')[2]["attribs"]["data-src") {
+                                } else if ($('img')[2] && $('img')[2]["attribs"]["data-src"]) {
                                     thumb_nail = $('img')[2]["attribs"]["data-src"];
-                                } else if ($('img')[1] && $('img')[1]["attribs"]["src") {
+                                } else if ($('img')[1] && $('img')[1]["attribs"]["src"]) {
                                     thumb_nail = $('img')[1]["attribs"]["src"];
                                 }
                                 // 获取文章摘要
