@@ -147,10 +147,10 @@ WX_SPIDER.get_info_by_url = function(article_titles, article_urls, article_pub_t
                                 var wechat_number = $("#post-user").text();
                                 //第一张图片
                                 var thumb_nail = "";
-                                if ($('img')[3] && $('img')[3]["attribs"]["data-src"]) {
-                                    thumb_nail = $('img')[3]["attribs"]["data-src"];
-                                } else if ($('img')[2] && $('img')[2]["attribs"]["data-src"]) {
+                                if ($('img')[2] && $('img')[2]["attribs"]["data-src"]) {
                                     thumb_nail = $('img')[2]["attribs"]["data-src"];
+                                } else if ($('img')[3] && $('img')[3]["attribs"]["data-src"]) {
+                                    thumb_nail = $('img')[3]["attribs"]["data-src"];
                                 } else if ($('img')[1] && $('img')[1]["attribs"]["src"]) {
                                     thumb_nail = $('img')[1]["attribs"]["src"];
                                 }
@@ -187,22 +187,22 @@ WX_SPIDER.get_info_by_url = function(article_titles, article_urls, article_pub_t
                             callback(null, article_url);
                         })
                     })
-                    task2.push(function(article_url, callback) {
-                        var suffix_url = `&devicetype=Windows-QQBrowser&version=61030004&pass_ticket=qMx7ntinAtmqhVn+C23mCuwc9ZRyUp20kIusGgbFLi0=&uin=MTc1MDA1NjU1&ascene=1`;
-                        var get_forever_url = article_url + '';
-                        var options = {
-                            url: get_forever_url,
-                            headers: {
-                                'User-Agent': 'request'
-                            }
-                        };
-                        request(options, function(error, response, body) {
-                            if (!error && response.statusCode == 200) {
-                                article_object.url = response.request.href;
-                            }
-                            callback(null);
-                        });
-                    })
+                    // task2.push(function(article_url, callback) {
+                    //     var suffix_url = `&devicetype=Windows-QQBrowser&version=61030004&pass_ticket=qMx7ntinAtmqhVn+C23mCuwc9ZRyUp20kIusGgbFLi0=&uin=MTc1MDA1NjU1&ascene=1`;
+                    //     var get_forever_url = article_url + '';
+                    //     var options = {
+                    //         url: get_forever_url,
+                    //         headers: {
+                    //             'User-Agent': 'request'
+                    //         }
+                    //     };
+                    //     request(options, function(error, response, body) {
+                    //         if (!error && response.statusCode == 200) {
+                    //             article_object.url = response.request.href;
+                    //         }
+                    //         callback(null);
+                    //     });
+                    // })
                     async.waterfall(task2, function(err, result) {
                         if (err) {
                             console.log('The article has removed!!! go on the next...');
