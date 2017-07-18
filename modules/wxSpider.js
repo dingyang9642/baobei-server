@@ -3,7 +3,7 @@ var async = require('async');
 var cheerio = require('cheerio');
 var WX_SPIDER = {};
 
-var GLOBAL_WX_PUBLIC_NUMBER = "";  // 微信公众号名称
+var GLOBAL_WX_PUBLIC_NUMBER = ""; // 微信公众号名称
 var GLOBAL_WX_PUBLIC_NUMBER_TYPE = ""; // 卫星公众号类型
 
 /**
@@ -185,7 +185,7 @@ WX_SPIDER.get_info_by_url = function(article_titles, article_urls, article_pub_t
                     })
                     task2.push(function(article_url, callback) {
                         var suffix_url = `&devicetype=Windows-QQBrowser&version=61030004&pass_ticket=qMx7ntinAtmqhVn+C23mCuwc9ZRyUp20kIusGgbFLi0=&uin=MTc1MDA1NjU1&ascene=1`;
-                        var get_forever_url = article_url + suffix_url;
+                        var get_forever_url = article_url + '';
                         var options = {
                             url: get_forever_url,
                             headers: {
@@ -220,10 +220,26 @@ WX_SPIDER.get_info_by_url = function(article_titles, article_urls, article_pub_t
     })
 };
 
+WX_SPIDER.convertImgToBase64 = function(url, callback, outputFormat) {
+    var canvas = document.createElement('CANVAS'),
+        ctx = canvas.getContext('2d'),
+        img = new Image;
+    img.crossOrigin = 'Anonymous';
+    img.onload = function() {
+        canvas.height = img.height;
+        canvas.width = img.width;
+        ctx.drawImage(img, 0, 0);
+        var dataURL = canvas.toDataURL(outputFormat || 'image/png');
+        callback.call(this, dataURL);
+        canvas = null;
+    };
+    img.src = url;
+};
+
 WX_SPIDER.filterArcticleAbstract = function(abstract, maxLength) {
     maxLength = maxLength || 100;
     // 首先进行左右空字符串删除操作
-    abstract = abstract.replace(/(^\s*)|(\s*$)/g, ''); 
+    abstract = abstract.replace(/(^\s*)|(\s*$)/g, '');
     // 如果摘要为空，直接返回空字符串
     if (abstract === "") return "";
     // 否则，继续进行特殊字符判断
