@@ -210,7 +210,7 @@ var WX_ARTICLE = {
      * @return      {array}   返回文章数组列表
      */
     getArticlesByType: function(type, callback) {
-        var sql = "select * from wx_articles where type='" + type + "' order by create_time";
+        var sql = "select * from wx_articles where type='" + type + "' order by release_time desc";
         DB.select(sql, function(data) {
             callback && callback(data);
         });
@@ -223,7 +223,7 @@ var WX_ARTICLE = {
      */
     getArticlesWithPage: function(type, pageNum, pageSize, callback) {
         var startIndex = (pageNum - 1) * pageSize;
-        var sql = "select * from wx_articles where type='" + type + "' order by create_time limit " + startIndex + "," + pageSize;
+        var sql = "select * from wx_articles where type='" + type + "' order by release_time desc limit " + startIndex + "," + pageSize;
         DB.select(sql, function(data) {
             if (data.resultCode === "0") {
                 var countSql = "select count(id) from wx_articles where type='" + type + "'";
