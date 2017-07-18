@@ -116,6 +116,17 @@ var wxControl = {
     },
 
     /**
+     * 删除所有文章
+     * @Author   dingyang   [dingyang@baidu.com]
+     * @DateTime 2017-07-16
+     * @param    {Function} callback             [description]
+     * @return   {[type]}                        [description]
+     */
+    deleteArticles: function(callback) {
+        wxDB.deleteArticles(callback);
+    },
+
+    /**
      * 获取所有文章
      * @Author   dingyang   [dingyang@baidu.com]
      * @DateTime 2017-07-16

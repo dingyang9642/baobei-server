@@ -197,6 +197,13 @@ var WX_ARTICLE = {
         });
     },
 
+    deleteArticles: function(callback) {
+        var sql = "delete from wx_articles";
+        DB.delete(sql, function(data) {
+            callback && callback(data);
+        });
+    },
+
     /**
      * @description 获取所有文章
      * @dateTime    2017-05-09

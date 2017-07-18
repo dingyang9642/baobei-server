@@ -21,6 +21,14 @@ appWXApi.get('/stopTaskSpider', function(req, res) {
 // 开始爬取代码
 appWXApi.get('/start', function(req, res) {
     wxControl.starSpider(function(data){
+        console.log(data);
+    });
+    res.json({
+        msg: '后台开始爬虫...'
+    });
+});
+appWXApi.get('/delete', function(req, res) {
+    wxControl.deleteArticles(function(data){
         res.json(data);
     });
 });
