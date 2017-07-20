@@ -187,22 +187,29 @@ WX_SPIDER.get_info_by_url = function(article_titles, article_urls, article_pub_t
                             callback(null, article_url);
                         })
                     })
-                    // task2.push(function(article_url, callback) {
-                    //     var suffix_url = `&devicetype=Windows-QQBrowser&version=61030004&pass_ticket=qMx7ntinAtmqhVn+C23mCuwc9ZRyUp20kIusGgbFLi0=&uin=MTc1MDA1NjU1&ascene=1`;
-                    //     var get_forever_url = article_url + '';
-                    //     var options = {
-                    //         url: get_forever_url,
-                    //         headers: {
-                    //             'User-Agent': 'request'
-                    //         }
-                    //     };
-                    //     request(options, function(error, response, body) {
-                    //         if (!error && response.statusCode == 200) {
-                    //             article_object.url = response.request.href;
-                    //         }
-                    //         callback(null);
-                    //     });
-                    // })
+                    task2.push(function(article_url, callback) {
+                        var suffix_url = `&devicetype=Windows-QQBrowser&version=61030004&pass_ticket=qMx7ntinAtmqhVn+C23mCuwc9ZRyUp20kIusGgbFLi0=&uin=MTc1MDA1NjU1&ascene=1`;
+                        var get_forever_url = article_url + '';
+                        var options = {
+                            url: get_forever_url,
+                            headers: {
+                                'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+                                'Accept-Encoding':'gzip, deflate, br',
+                                'Accept-Language':'zh-CN,zh;q=0.8,en;q=0.6',
+                                'Connection':'keep-alive',
+                                'Cookie':'RK=wb/yNPH7ak; pgv_pvi=4051192832; pac_uid=1_834864699; ptcz=f6b5e8f90b1f22459e3fb6aad053146eed9fe6165b8c171730dfbdc91afbf507; luin=o0834864699; lskey=000100008220db6a88b97c267a0ddeec6712dac7b420bef3df7f497526e67335d8bde1c60162b4cfc44bc51f; pt2gguin=o0834864699; pgv_pvid=9202209354; o_cookie=834864699; ua_id=eKap0MovSnkBFAjFAAAAAJR89jkWD_Snxw90MHWX0vM=; pgv_si=s7639586816; wxuin=2095382721; pass_ticket=xLszrCbUCta6n8VpW0WgnwLhLi+dJDjc7PrzwAfie/HidNpc0kG5nUG2T9dEnqYg; wap_sid2=CMGBlOcHElw2RWJoS3FmV1JIWHZlMFFtOFpESWpnUnlMVzE3d29BaUYxSUhpM3lFTEJBb0pLeVhWNDA1dGkxUmxNMGQwTHJZYi1RRGNjczZudTFsNnNTRlNndi1kSklEQUFBfjCD0MLLBTgNQAE=; qqmusic_fromtag=66; wxtokenkey=49563f35783f79ee2b660c25494976a0ce5fb2ba44132219da6b2b380504568d',
+                                'Host':'mp.weixin.qq.com',
+                                'Upgrade-Insecure-Requests':'1',
+                                'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'
+                            }
+                        };
+                        request(options, function(error, response, body) {
+                            if (!error && response.statusCode == 200) {
+                                article_object.url = response.request.href;
+                            }
+                            callback(null);
+                        });
+                    })
                     async.waterfall(task2, function(err, result) {
                         if (err) {
                             console.log('The article has removed!!! go on the next...');
