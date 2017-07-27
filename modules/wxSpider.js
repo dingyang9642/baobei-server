@@ -188,28 +188,47 @@ WX_SPIDER.get_info_by_url = function(article_titles, article_urls, article_pub_t
                         })
                     })
                     task2.push(function(article_url, callback) {
-                        var suffix_url = `&devicetype=Windows-QQBrowser&version=61030004&pass_ticket=qMx7ntinAtmqhVn+C23mCuwc9ZRyUp20kIusGgbFLi0=&uin=MTc1MDA1NjU1&ascene=1`;
-                        var get_forever_url = article_url + '';
                         var options = {
-                            url: get_forever_url,
+                            url: "http://www.duigouketang.com/convert",
+                            method: 'POST',
+                            formData: {
+                                u: article_url
+                            },
+                            json: true,
                             headers: {
-                                'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-                                'Accept-Encoding':'gzip, deflate, br',
-                                'Accept-Language':'zh-CN,zh;q=0.8,en;q=0.6',
-                                'Connection':'keep-alive',
-                                'Cookie': 'wxtokenkey=f7c9ae37c69c347630f24ec81e7fb36fbf9117ac8dc0865496ad7d6b716d7b75; wxuin=473096215; pass_ticket=RupY8z+t/iVc0e3aqDvWe/GzB9duKqmkK7Jc2G2dMT+t9CKTRnercOxyRqBUOie/; wap_sid2=CJfAy+EBElx6NEFsX3NBZnJlMVZyUG9LVzZTWGNfRF9ZYWJ0UHlOZ3F4a0g5OWxWeXpxdms2S18yc1Mxak51cy1nVWRGNHFiOU9qRWprRjIyVzJ1TWRpblVSaGNMSklEQUFBfjD93MLLBTgNQAE=',
-                                'Host':'mp.weixin.qq.com',
-                                'Upgrade-Insecure-Requests':'1',
-                                'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'
+                                "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
                             }
                         };
                         request(options, function(error, response, body) {
-                            if (!error && response.statusCode == 200) {
-                                article_object.url = response.request.href;
+                            if (!error && response.statusCode == 200 && body.status == 1) {
+                                article_object.url = body.url;
                             }
                             callback(null);
                         });
                     })
+                    // task2.push(function(article_url, callback) {
+                    //     var suffix_url = `&devicetype=Windows-QQBrowser&version=61030004&pass_ticket=qMx7ntinAtmqhVn+C23mCuwc9ZRyUp20kIusGgbFLi0=&uin=MTc1MDA1NjU1&ascene=1`;
+                    //     var get_forever_url = article_url + '';
+                    //     var options = {
+                    //         url: get_forever_url,
+                    //         headers: {
+                    //             'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+                    //             'Accept-Encoding':'gzip, deflate, br',
+                    //             'Accept-Language':'zh-CN,zh;q=0.8,en;q=0.6',
+                    //             'Connection':'keep-alive',
+                    //             'Cookie': 'wxtokenkey=f7c9ae37c69c347630f24ec81e7fb36fbf9117ac8dc0865496ad7d6b716d7b75; wxuin=473096215; pass_ticket=RupY8z+t/iVc0e3aqDvWe/GzB9duKqmkK7Jc2G2dMT+t9CKTRnercOxyRqBUOie/; wap_sid2=CJfAy+EBElx6NEFsX3NBZnJlMVZyUG9LVzZTWGNfRF9ZYWJ0UHlOZ3F4a0g5OWxWeXpxdms2S18yc1Mxak51cy1nVWRGNHFiOU9qRWprRjIyVzJ1TWRpblVSaGNMSklEQUFBfjD93MLLBTgNQAE=',
+                    //             'Host':'mp.weixin.qq.com',
+                    //             'Upgrade-Insecure-Requests':'1',
+                    //             'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'
+                    //         }
+                    //     };
+                    //     request(options, function(error, response, body) {
+                    //         if (!error && response.statusCode == 200) {
+                    //             article_object.url = response.request.href;
+                    //         }
+                    //         callback(null);
+                    //     });
+                    // })
                     async.waterfall(task2, function(err, result) {
                         if (err) {
                             console.log('The article has removed!!! go on the next...');
