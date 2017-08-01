@@ -233,8 +233,8 @@ var WX_ARTICLE = {
                         var newResult = {};
                         newResult.articles = data.result;
                         newResult.pagination = {
-                            pageNum: pageNum,
-                            pageSize: pageSize,
+                            pageNum: pageNum * 1,
+                            pageSize: pageSize * 1,
                             totalCount: countNumber
                         };
                         data.result = newResult;
