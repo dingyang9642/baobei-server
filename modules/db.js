@@ -69,7 +69,7 @@ var DB = {
                         formatResult = self._getDBQueryErrorResult(err);
                     } else {
                         var resultData = values;
-                        formatResult = COMMON.formatResult(MSGCODE.DBERROR_SUCCESS_CODE, MSGCODE.DBERROR_SUCCESS_MSG, resultData);
+                        formatResult = COMMON.formatResult(MSGCODE.SUCCESS_CODE, MSGCODE.SUCCESS_MSG, resultData);
                     }
                     callback(formatResult);      // 事件驱动回调
                 });

@@ -3,9 +3,11 @@
  * @type {Object}
  */
 var MSG_CODE = {
+    SUCCESS_CODE                : "0",
+    SUCCESS_MSG                 : "SUCCESS",
+    NETWORK_ERROR_CODE          : "9000",
+    NETWORK_ERROR_MSG           : "爬虫网络错误",
     // 数据库相关描述
-    DBERROR_SUCCESS_CODE                : "0",
-    DBERROR_SUCCESS_MSG                 : "SUCCESS",
     DBERROR_CONNECTION_CODE             : "1000",
     DBERROR_CONNECTION_MSG              : "数据库连接失败",
     DBERROR_TABLE_NOTEXIT_CODE          : "1001",
@@ -36,7 +38,13 @@ var MSG_CODE = {
     ADDWX_ARTICLE_DATA_ILLEGAL_MSG      : "数据不合法",
     // 查询微信文章
     QUERYWX_ARTICLE_NOT_EXIT_CODE       : "3101",
-    QUERYWX_ARTICLE_NOT_EXIT_MSG        : "文章不存在"
+    QUERYWX_ARTICLE_NOT_EXIT_MSG        : "文章不存在",
+
+    // 百度股市通爬虫
+    BAIDU_GUPIAO_DATA_ERROR_CODE        : "4000",
+    BAIDU_GUPIAO_DATA_ERROR_MSG         : "百度股市通数据错误",
+    GUPIAO_INVALID_CODE                 : "4001",
+    GUPIAO_INVALID_MSG                  : "本股不符合筛选条件"
 
 };
 

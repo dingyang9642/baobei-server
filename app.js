@@ -14,6 +14,7 @@ var index = require('./routes/index');
 var wxApi = require('./api/wx');
 var indexApi = require('./api/index');
 var usersApi = require('./api/users');
+var financeApi = require('./api/finance');
 
 // compress responses 
 app.use(compression());
@@ -40,6 +41,7 @@ app.use('/api/common', commonApi);
 app.use('/api/wx', wxApi);
 app.use('/api/index', indexApi);
 app.use('/api/users', usersApi);
+app.use('/api/finance', financeApi);
 
 
 
