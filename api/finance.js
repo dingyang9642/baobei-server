@@ -2,29 +2,32 @@ var express = require('express');
 var appFinanceApi = express();
 var financeControl = require('../control/finance');
 
-appFinanceApi.get('/getKData', function(req, res) {
-	var gupiaoNum = req.query.code;
-	gupiaoNum = gupiaoNum || 'sh603599';
-	financeControl.getKData({
-		type: 'day',
-    	gupiaoNum: gupiaoNum,
-    	count: '40',
-    	callback: function(data){
-            res.json(data);
-    	}
-	});
+// 开始数据爬虫定时任务
+appFinanceApi.get('/start', function(req, res) {
+	// 1、获取请求参数
+	var dataCount = req.query.count || '1';
+    financeControl.addDatasToDB(dataCount, 0);
+    res.json({
+    	msg: '启动爬虫...'
+    });
 });
-appFinanceApi.get('/gupiao', function(req, res) {
-	var gupiaoType = req.query.type;
-	gupiaoType = gupiaoType || 'szc';
-	financeControl.getAllDatas({
-		gupiaoType: gupiaoType,
-		type: 'day',
-    	count: '40',
-    	callback: function(data){
-            res.json(data);
-    	}
-	}, 0, []);
+
+// 开始数据爬虫定时任务
+appFinanceApi.get('/startTaskSpider', function(req, res) {
+	// 1、获取请求参数
+	var dataCount = req.query.count || '1';
+    financeControl.startSchedule(dataCount);
+    res.json({
+    	msg: '启动定时任务-爬虫...'
+    });
+});
+
+// 停止数据爬虫定时任务
+appFinanceApi.get('/stopTaskSpider', function(req, res) {
+    financeControl.cancelSchedule();
+    res.json({
+    	msg: '关闭定时任务-爬虫...'
+    });
 });
 
 module.exports = appFinanceApi;
