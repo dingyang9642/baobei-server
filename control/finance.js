@@ -30,7 +30,7 @@ var financeControl = {
         var rule = new schedule.RecurrenceRule();
         rule.dayOfWeek = [0, new schedule.Range(1, 6)];
         rule.hour = 14;
-        rule.minute = 15;
+        rule.minute = 10;
         // 定时任务启动
         _this._scheduleId = schedule.scheduleJob(rule, function(){
             _this.addDatasToDB(dataCount, 0);
