@@ -28,7 +28,9 @@ var financeControl = {
         _this.cancelSchedule();
         // 配置定时任务
         var rule = new schedule.RecurrenceRule();
-        rule.minute = 30;
+        rule.dayOfWeek = [0, new schedule.Range(1, 6)];
+        rule.hour = 14;
+        rule.minute = 15;
         // 定时任务启动
         _this._scheduleId = schedule.scheduleJob(rule, function(){
             _this.addDatasToDB(dataCount, 0);
@@ -68,7 +70,7 @@ var financeControl = {
                         self.addDatasToDB(dataCount, currentIndex);
                     }
                 });                
-            }, 1000);
+            }, 600);
         }
     },
     addPerDataToDB: function(options) {
