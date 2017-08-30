@@ -30,4 +30,12 @@ appFinanceApi.get('/stopTaskSpider', function(req, res) {
     });
 });
 
+// 获取某只股票k线数据
+appFinanceApi.get('/getResultWithCode', function(req, res) {
+    var code = req.query.code || 'sz300128';
+    financeControl.getDayKlineDatas(code, function(data){
+        res.json(data);
+    });
+});
+
 module.exports = appFinanceApi;

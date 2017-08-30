@@ -33,6 +33,18 @@ var FINANCE = {
         DB.insert(sql, function(data) {
             callback && callback(data);
         });
+    },
+    getDayKlineDatas: function(code, callback) {
+        var sql = '';
+        var codes = [code];
+        if(!isNaN(parseInt(code, 10))) {
+            codes = [code, 'sh' + code, 'sz' + code];
+        }
+        var tmpCodesStr = ToolUtil.array2str(codes, ',', true);
+        var sql = "select * from gupiao where code in (" + tmpCodesStr + ") order by date desc limit 20";
+        DB.select(sql, function(data) {
+            callback && callback(data);
+        });
     }
 };
 

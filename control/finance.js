@@ -87,6 +87,10 @@ var financeControl = {
     	};
     	financeSpider.getKData(newOptions);
     },
+    getDayKlineDatas: function(code, callback) {
+        financeDB.getDayKlineDatas(code, callback);
+    },
+
     // 下影线长度大于等于实体长度2倍【有效下影线】
     lowerShadowBuy: function(kDatas, code, callback) {
         var len = kDatas.length;
