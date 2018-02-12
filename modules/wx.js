@@ -69,7 +69,7 @@ var WX_ARTICLE = {
 
     /**
      * 根据文章列表返回列表标题数组
-     * @Author   dingyang   [dingyang@baidu.com]
+     * @Author   dingyang   [dingyang9642@126.com]
      * @DateTime 2017-07-13
      * @param    {[type]}   articleArr           [description]
      * @return   {[type]}                        [description]
@@ -85,7 +85,7 @@ var WX_ARTICLE = {
 
     /**
      * 根据文章标题集合获取数据库中存在的标题
-     * @Author   dingyang   [dingyang@baidu.com]
+     * @Author   dingyang   [dingyang9642@126.com]
      * @DateTime 2017-07-13
      * @param    {array}   articleTitles         [description]
      * @return   {[type]}                        [description]

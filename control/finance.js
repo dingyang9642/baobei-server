@@ -18,7 +18,7 @@ var financeControl = {
     _scheduleId: null,
     /**
      * 定时任务启动
-     * @Author   dingyang   [dingyang@baidu.com]
+     * @Author   dingyang   [dingyang9642@126.com]
      * @DateTime 2017-07-13
      * @return   {[type]}   [description]
      */
@@ -37,7 +37,7 @@ var financeControl = {
     },
     /**
      * 关闭定时任务
-     * @Author   dingyang   [dingyang@baidu.com]
+     * @Author   dingyang   [dingyang9642@126.com]
      * @DateTime 2017-07-13
      * @return   {[type]}   [description]
      */

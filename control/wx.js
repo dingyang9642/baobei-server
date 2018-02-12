@@ -15,7 +15,7 @@ var wxControl = {
     _scheduleId: null,
     /**
      * 定时任务启动
-     * @Author   dingyang   [dingyang@baidu.com]
+     * @Author   dingyang   [dingyang9642@126.com]
      * @DateTime 2017-07-13
      * @return   {[type]}   [description]
      */
@@ -37,7 +37,7 @@ var wxControl = {
     },
     /**
      * 关闭定时任务
-     * @Author   dingyang   [dingyang@baidu.com]
+     * @Author   dingyang   [dingyang9642@126.com]
      * @DateTime 2017-07-13
      * @return   {[type]}   [description]
      */
@@ -52,7 +52,7 @@ var wxControl = {
     _finalResults: [],
     /**
      * 获取爬虫任务
-     * @Author   dingyang   [dingyang@baidu.com]
+     * @Author   dingyang   [dingyang9642@126.com]
      * @DateTime 2017-07-12
      * @param    {[type]}   wxPublicName         [description]
      * @return   {[type]}                        [description]
@@ -83,7 +83,7 @@ var wxControl = {
 
     /**
      * 开始启动爬虫【任务应用】
-     * @Author   dingyang   [dingyang@baidu.com]
+     * @Author   dingyang   [dingyang9642@126.com]
      * @DateTime 2017-07-12
      * @param    {[type]}   startIndex           [description]
      * @param    {Function} callback             [description]
@@ -117,7 +117,7 @@ var wxControl = {
 
     /**
      * 删除所有文章
-     * @Author   dingyang   [dingyang@baidu.com]
+     * @Author   dingyang   [dingyang9642@126.com]
      * @DateTime 2017-07-16
      * @param    {Function} callback             [description]
      * @return   {[type]}                        [description]
@@ -128,7 +128,7 @@ var wxControl = {
 
     /**
      * 获取所有文章
-     * @Author   dingyang   [dingyang@baidu.com]
+     * @Author   dingyang   [dingyang9642@126.com]
      * @DateTime 2017-07-16
      * @param    {Function} callback             [description]
      * @return   {[type]}                        [description]
@@ -139,7 +139,7 @@ var wxControl = {
 
     /**
      * 通过type并且分页获取数据
-     * @Author   dingyang   [dingyang@baidu.com]
+     * @Author   dingyang   [dingyang9642@126.com]
      * @DateTime 2017-07-16
      * @param    {[type]}   type                 [description]
      * @param    {[type]}   pageNum              [description]
@@ -153,7 +153,7 @@ var wxControl = {
 
     /**
      * 通过文章id获取文章内容
-     * @Author   dingyang   [dingyang@baidu.com]
+     * @Author   dingyang   [dingyang9642@126.com]
      * @DateTime 2017-07-16
      * @param    {[type]}   _id                  [description]
      * @param    {Function} callback             [description]

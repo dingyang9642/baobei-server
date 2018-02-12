@@ -10,7 +10,7 @@ var MSGCODE = require('../conf/msgCode');
 var FINANCE_SPIDER = {
 	/**
 	 * [getKData description]
-	 * @Author   dingyang   [dingyang@baidu.com]
+	 * @Author   dingyang   [dingyang9642@126.com]
 	 * @DateTime 2017-08-19
 	 * @param    {string}   type                 day/week/month，默认day
 	 * @return   {[type]}                        [description]
