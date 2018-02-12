@@ -34,7 +34,7 @@ var FINANCE_SPIDER = {
         };  
         var content = qryStr.stringify(data);
 		var options = {  
-		    hostname: 'gupiao.baidu.com',  
+		    hostname: 'gupiao.bidu.com',   // 临时为了防爬虫价差，b-ai-du
 		    port: 443,  
 		    path: '/api/stocks/stockdaybar?' + content,
 		    method: 'GET'  
@@ -51,7 +51,7 @@ var FINANCE_SPIDER = {
 		            callback && callback(formatResult);
                 } else {
                 	console.log('finance spider data error');
-                	var formatResult = COMMON.formatResult(MSGCODE.BAIDU_GUPIAO_DATA_ERROR_CODE, MSGCODE.BAIDU_GUPIAO_DATA_ERROR_MSG, {});
+                	var formatResult = COMMON.formatResult(MSGCODE.BIDU_GUPIAO_DATA_ERROR_CODE, MSGCODE.BIDU_GUPIAO_DATA_ERROR_MSG, {});
 		            callback && callback(formatResult);
                 }
 	        }); 
